@@ -15,7 +15,7 @@ Required Vimwiki Settings in vimrc:
 1.  custom_wiki2html should point to this file.
 2.  path_html must be set
 3.  syntax should equal 'markdown'
-4.  css_name should point to the css file you want to use.  This has a default value of style.css so copying the provided style.css from autoload/vimwiki/ to your path_html should be sufficient to get started. 
+4.  css_name should point to the css file you want to use.  This has a default value of style.css so copying the provided style.css from autoload/vimwiki/ to your path_html should be sufficient to get started.
 
 """
 
@@ -59,7 +59,7 @@ template = Template("""
             </html>"""
             )
 """TODO:
-    Finish implementing template handling.  Will need vimwiki settings 
+    Finish implementing template handling.  Will need vimwiki settings
     info passed for the following:
         vimwiki-option-template_path
         vimwiki-option-template_default
@@ -74,25 +74,25 @@ if __name__ == '__main__':
             "existing html file.  0 = no, 1 = yes")
     parser.add_argument("syntax", help="The syntax of the file to be "
             "converted.  The only format  currently supported is markdown. "
-            "So this argument should always be markdown.", 
+            "So this argument should always be markdown.",
             choices=["markdown"])
     parser.add_argument("extension", help="The extension of the input file. "
             "For example: wiki, txt, or md")
     parser.add_argument("outputdir", help="The absolute path to the directory "
             "where the output html file will be created.")
-    parser.add_argument("input_file", type=argparse.FileType('r'), 
+    parser.add_argument("input_file", type=argparse.FileType('r'),
             help="The file name (including absolute path) of the markdown "
             "formatted file to be converted to html.")
     parser.add_argument("cssfile", help="The css file (with absolute path) to "
             "be referenced in the resulting html file.")
-    ns = parser.parse_args()
+    ns, unknown = parser.parse_known_args()
 
     input_file = ns.input_file.read()
     input_filename = os.path.basename(ns.input_file.name)
-    # split the filename into the name and the extension and just keep the 
+    # split the filename into the name and the extension and just keep the
     # first one -- the name.  Then give it a new .html extension
-    output_filename = os.path.splitext(input_filename)[0] + '.html' 
-    output_file_path = os.path.join(ns.outputdir, output_filename) 
+    output_filename = os.path.splitext(input_filename)[0] + '.html'
+    output_file_path = os.path.join(ns.outputdir, output_filename)
 
     if ns.force or (os.path.exists(output_file_path) != True):
 
@@ -106,7 +106,7 @@ if __name__ == '__main__':
 
                 Keyword arguments:
                 text -- the input markdown file as a string
-                patterns -- a dictionary of patterns to search for.  The 
+                patterns -- a dictionary of patterns to search for.  The
                             following codes are used:
                                 %nohtml
                                 %title My Title
@@ -121,26 +121,26 @@ if __name__ == '__main__':
                     if current_match:
                         self.percent_codes[key] = current_match.group(1)
                         #cut out the line with the percent code on it.
-                        text = (text[:current_match.start()] + 
+                        text = (text[:current_match.start()] +
                                 text[current_match.end():])
                     else:
                         self.percent_codes[key] = None
                 return text
-                
+
             def preprocess(self, text):
                 """Change wikilinks to regular markdown links.
 
                 Keyword arguments:
                 text -- the input markdown file as a string
 
-                This method is automatically called when a renderer is 
+                This method is automatically called when a renderer is
                 rendered.
 
                 The following two wikilink patterns are handled:
-                    [[some link text]] 
+                    [[some link text]]
                     [[link|description]]
 
-                and are change to markdown style links like: 
+                and are change to markdown style links like:
                     [some link text](some link text.html)
 
                 """
@@ -172,9 +172,9 @@ if __name__ == '__main__':
             pass
 
         renderer = VimwikiHtmlRenderer(HTML_TOC)
-        to_html = Markdown(renderer, extensions= EXT_NO_INTRA_EMPHASIS | 
-            EXT_TABLES | EXT_FENCED_CODE | EXT_AUTOLINK | 
-            EXT_STRIKETHROUGH | EXT_SUPERSCRIPT) 
+        to_html = Markdown(renderer, extensions= EXT_NO_INTRA_EMPHASIS |
+            EXT_TABLES | EXT_FENCED_CODE | EXT_AUTOLINK |
+            EXT_STRIKETHROUGH | EXT_SUPERSCRIPT)
         main_content = to_html.render(input_file)
         if renderer.percent_codes['no_html']:
             print(output_file_path + " not converted due to presence of "
@@ -182,7 +182,7 @@ if __name__ == '__main__':
         else:
             if renderer.percent_codes['toc']:
                 toc_renderer = VimwikiTocRenderer()
-                to_toc = Markdown(toc_renderer, 
+                to_toc = Markdown(toc_renderer,
                         extensions = EXT_NO_INTRA_EMPHASIS | EXT_AUTOLINK)
                 toc_content = to_toc.render(input_file)
             else:
