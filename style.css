@@ -11,9 +11,7 @@ html {
     line-height: 1;
 }
 
-#content {
-    margin-top: 60px;
-    font-family: Helvetica, Arial, Verdana;
+body {
 }
 
 ol,ul {
@@ -60,10 +58,6 @@ code,kbd,samp,pre,tt,var,textarea,input,select,isindex,listing,xmp,plaintext {
 html {
     font-size: 16px;
     line-height: 1.5em;
-}
-
-html {
-    font-size: 100%;
     overflow-y: scroll;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
@@ -74,7 +68,7 @@ body {
     font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
     font-size: 12px;
     line-height: 1.5em;
-    padding: 1em;
+    padding: 60px 0 60px 0;
     margin: auto;
     max-width: 42em;
     background: #fefefe;
@@ -133,6 +127,17 @@ img {
     max-width: 100%;
 }
 
+ul {
+    list-style: square;
+    margin-left: 0;
+}
+
+li p {
+	display: inline-block;
+    margin: 0 0 1em 0;
+	vertical-align: top;
+}
+
 h1,h2,h3,h4,h5,h6 {
     font-weight: normal;
     color: #111;
@@ -154,10 +159,12 @@ h2 {
 }
 
 h3 {
+	padding-top: 1.2em;
     font-size: 1.5em;
 }
 
 h4 {
+	padding-top: 1em;
     font-size: 1.2em;
 }
 
@@ -190,7 +197,7 @@ pre,code,kbd,samp {
     color: #000;
     font-family: Consolas, Monaco, "Courier New", Courier, monospace;
     _font-family: Consolas, Monaco, "Courier New", Courier, monospace;
-    font-size: 0.8em;
+    font-size: 1em;
 }
 
 pre {
@@ -240,9 +247,6 @@ ul,ol {
     padding: 0 0 0 2em;
 }
 
-li p:last-child {
-    margin: 0;
-}
 
 dd {
     margin: 0 0 0 2em;
@@ -263,9 +267,14 @@ td {
     vertical-align: top;
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 0px) {
     body {
         font-size: 14px;
+		padding-left: 2em;
+		padding-right: 2em;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
     }
 }
 
