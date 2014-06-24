@@ -39,9 +39,7 @@ template = Template("""
             <!DOCTYPE html>
             <html>
             <head>
-                {% if cssfile %}
-                    <link href="{{ cssfile }}" rel="stylesheet">
-                {% endif %}
+                <link href="style.css" rel="stylesheet">
                 {% if title %}
                     <title>{{ title }}</title>
                 {% endif %}
