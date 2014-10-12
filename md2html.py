@@ -39,7 +39,7 @@ template = Template("""
             <!DOCTYPE html>
             <html>
             <head>
-                <link href="http://dl.dropboxusercontent.com/u/809887/wiki/style.css" rel="stylesheet">
+                <link href="//dl.dropboxusercontent.com/u/809887/wiki/style.css" rel="stylesheet">
                 {% if title %}
                     <title>{{ title }}</title>
                 {% endif %}
